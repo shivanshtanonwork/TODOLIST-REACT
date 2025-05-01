@@ -31,13 +31,13 @@ export default function TodoList() {
         )
     }
 
-    let upperCaseOne = (id) => {
+    let markAsDone = (id) => {
         setTodos((prevTodos) =>
             prevTodos.map((todo) => {
                 if (todo.id == id) {
                     return {
                         ...todo,
-                        task: todo.task.toUpperCase()
+                        isDone: true,
                     }
                 } else {
                     return todo
@@ -59,10 +59,12 @@ export default function TodoList() {
                 {
                     todos.map((todo) => (         //map is used to render array
                         <li key={todo.id}>
-                            <span> {todo.task}</span>
+                            <span style={todo.isDone ? { textDecorationLine: "line-through" } : {}}>
+                                {todo.task}
+                            </span>
                             &nbsp;&nbsp;&nbsp;
                             <button onClick={() => deleteTodo(todo.id)}>Delete</button>
-                            <button onClick={() => upperCaseOne(todo.id)}>UpperCase One</button>
+                            <button onClick={() => markAsDone(todo.id)}>Mark As Done</button>
                         </li>
                     ))
                 }
